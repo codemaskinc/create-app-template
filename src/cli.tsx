@@ -10,20 +10,31 @@ const cli = meow(
 	  $ create-codemask-app
 
 	Options
-		--name Your name
+        --npm Use npm 
+        --yarn Use yarn
+        --pnpm Use pnpm
+		--bun Use bun
 
 	Examples
-	  $ create-codemask-app --name=Jane
-	  Hello, Jane
+	  $ create-codemask-app --bun
 `,
 	{
 		importMeta: import.meta,
 		flags: {
-			name: {
-				type: 'string',
+			npm: {
+				type: 'boolean'
 			},
-		},
-	},
+            yarn: {
+				type: 'boolean'
+			},
+            pnpm: {
+				type: 'boolean'
+			},
+            bun: {
+				type: 'boolean'
+			}
+		}
+	}
 )
 
 export const { flags } = cli
