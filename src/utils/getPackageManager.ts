@@ -1,5 +1,5 @@
-import { flags } from "../cli.js"
-import { PackageManager } from "../types/index.js"
+import { flags } from '../cli.js'
+import { PackageManager } from '../types/index.js'
 
 export const getUserPkgManager = () => {
     const forcedManager = Object.values(PackageManager).find(manager => flags[manager] === true)

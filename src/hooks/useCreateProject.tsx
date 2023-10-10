@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react"
-import { Text, useApp } from "ink"
-import fs from "fs-extra"
-import { QuestionInput } from "../components/index.js"
-import { Question } from "./useQuestions.js"
-import { copyTemplate, installDeps } from "../utils/index.js"
-import { CreateProgress } from "../types/progress.js"
+import React, { useEffect, useState } from 'react'
+import { Text, useApp } from 'ink'
+import fs from 'fs-extra'
+import { QuestionInput } from '../components/index.js'
+import { copyTemplate, installDeps, replaceInFile, initGit } from '../utils/index.js'
+import { CreateProgress, Question, Template } from '../types/index.js'
 
 const textByProgress = {
     [CreateProgress.CopyTemplate]: 'Copying template...',
+    [CreateProgress.InitGit]: 'Initializing git...',
     [CreateProgress.InstallDeps]: 'Installing dependencies...',
     [CreateProgress.Complete]: 'Done! 🚀',
 }
@@ -23,9 +23,12 @@ export const useCreateProject = (answers: Record<Question, string>) => {
         const path = answers['app-dir']
 
         addProgress(CreateProgress.CopyTemplate)
-        copyTemplate(path)
+        copyTemplate(path, answers['template'] as Template)
+        addProgress(CreateProgress.InitGit)
+        initGit(path)
         addProgress(CreateProgress.InstallDeps)
         await installDeps(path)
+        replaceInFile(`${path}/package.json`, 'my-app', answers['app-dir'].replace(/.*\//, ''))
         addProgress(CreateProgress.Complete)
         exit()
     }

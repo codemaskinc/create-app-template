@@ -20,7 +20,8 @@
 		"meow": "11.0.0",
 		"react": "18.2.0",
         "fs-extra": "11.1.1",
-        "execa": "8.0.1"
+        "execa": "8.0.1",
+        "npm-check-updates": "16.14.5"
 	},
 	"devDependencies": {
 		"@sindresorhus/tsconfig": "3.0.1",

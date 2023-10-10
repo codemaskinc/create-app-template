@@ -1,4 +1,4 @@
-import { Box, Text, useInput } from 'ink';
+import { Box, Text, useInput } from 'ink'
 import React, { useEffect, useState } from 'react'
 
 type QuestionInputProps = {

@@ -1,10 +1,14 @@
-import React from 'react'
-import { Box, Text, useInput } from "ink"
-import { useState } from "react"
+import React, { useState } from 'react'
+import { Box, Text, useInput } from 'ink'
+
+type Item = {
+    label: string,
+    value: string
+}
 
 type ListProps = {
     title: string,
-    list: Array<string>,
+    list: Array<Item>,
     onSubmit(answer: string): void,
     getReply(answer: string): string
 }
@@ -36,7 +40,7 @@ export const List: React.FunctionComponent<ListProps> = ({
         }
 
         if (key.return) {
-            onSubmit(list[current]!)
+            onSubmit(list[current]?.value!)
             setAnswered(true)
 
             return
@@ -50,16 +54,16 @@ export const List: React.FunctionComponent<ListProps> = ({
             </Text>
             {list.map((item, index) => (
                 <Text 
-                    key={item}
+                    key={item.label}
                     color={index === current ? 'red' : 'white'}
                 >
                     {index === current && !answered ? '> ' : '  '}
-                    {item}
+                    {item.label}
                 </Text>
             ))}
             {answered && (
                 <Text color='green'>
-                    {getReply(list[current]!)}
+                    {getReply(list[current]!.value)}
                 </Text>
             )}
         </Box>

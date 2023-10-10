@@ -1,27 +1,6 @@
-import React, { useState } from "react"
-import { List, QuestionInput } from "../components/index.js"
-
-export enum Question {
-    AppDir = 'app-dir',
-    Template = 'template',
-    TsOrJs = 'ts-or-js'
-}
-
-export enum QuestionType {
-    Text = 'text',
-    List = 'list'
-}
-
-type QuestionItem = {
-    type: QuestionType.Text,
-    initialValue?: string,
-    question: string
-} | {
-    type: QuestionType.List,
-    question: string,
-    options: string[],
-    reply(answer: string): string
-}
+import React, { useState } from 'react'
+import { List, QuestionInput } from '../components/index.js'
+import { Question, QuestionItem, QuestionType, Template } from '../types/index.js'
 
 const questions = {
     [Question.AppDir]: {
@@ -32,13 +11,39 @@ const questions = {
     [Question.Template]: {
     type: QuestionType.List,
         question: 'What template will you use?',
-        options: ['React', 'React Native', 'NestJS', 'Astro'],
+        options: [
+            {
+                label: 'React',
+                value: Template.React
+            },
+            {
+                label: 'React Native',
+                value: Template.ReactNative
+            },
+            {
+                label: 'Astro',
+                value: Template.Astro
+            },
+            {
+                label: 'NestJS',
+                value: Template.NestJS
+            }
+        ],
         reply: answer => `Good choice! Using ${answer} 🚀!`
     },
     [Question.TsOrJs]: {
         type: QuestionType.List,
         question: 'Will you use TypeScript or JavaScript?',
-        options: ['TypeScript', 'JavaScript'],
+        options: [
+            {
+                label: 'Typescript',
+                value: 'Typescript'
+            },
+            {
+                label: 'Javascript',
+                value: 'Javascript'
+            }
+        ],
         reply: answer => answer === 'TypeScript' ? 'Good choice! Using Typescript!' : 'Wrong choice! Using Typescript instead!'
     }
 } satisfies Record<Question, QuestionItem>
