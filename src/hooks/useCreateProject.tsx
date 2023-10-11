@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Text, useApp } from 'ink'
 import fs from 'fs-extra'
 import { QuestionInput } from '../components/index.js'
-import { copyTemplate, installDeps, replaceInFile, initGit, addExtras } from '../utils/index.js'
-import { CreateProgress, Question, Template } from '../types/index.js'
+import { CreateProgress, Question } from '../types/index.js'
+import { installDeps, replaceInFile, initGit, addExtras } from '../utils/index.js'
 
 const textByProgress = {
     [CreateProgress.CopyTemplate]: 'Copying template...',
@@ -20,20 +20,20 @@ export const useCreateProject = (answers: Record<Question, string>) => {
     const addProgress = (newProgress: CreateProgress) => setProgress(oldProgress => [...oldProgress, newProgress])
 
     const createProject = async () => {
-        const path = answers['app-dir']
+        const { extras, template, appDir } = answers
 
         addProgress(CreateProgress.CopyTemplate)
-        copyTemplate(path, answers['template'] as Template)
+        fs.copySync(`./template/${template}/base`, appDir)
         addExtras({
-            extras: answers['extras'],
-            path,
-            template: answers['template']
+            extras,
+            appDir,
+            template
         })
         addProgress(CreateProgress.InitGit)
-        initGit(path)
+        initGit(appDir)
         addProgress(CreateProgress.InstallDeps)
-        await installDeps(path)
-        replaceInFile(`${path}/package.json`, 'my-app', answers['app-dir'].replace(/.*\//, ''))
+        await installDeps(appDir)
+        replaceInFile(`${appDir}/package.json`, 'my-app', appDir.replace(/.*\//, ''))
         addProgress(CreateProgress.Complete)
         exit()
     }
@@ -45,7 +45,7 @@ export const useCreateProject = (answers: Record<Question, string>) => {
             return
         }
 
-        if (fs.existsSync(answers['app-dir'])) {
+        if (fs.existsSync(answers[Question.AppDir])) {
             setPathExist(true)
 
             return
@@ -66,7 +66,7 @@ export const useCreateProject = (answers: Record<Question, string>) => {
         ) : null,
         forceCreateQuestion: pathExist && progress.length === 0 ? (
             <QuestionInput
-                question={`Path ${answers['app-dir']} already exists. Do you want to overwrite it? You will lose all data that is in here. (y/n)`}
+                question={`Path ${answers[Question.AppDir]} already exists. Do you want to overwrite it? You will lose all data that is in here. (y/n)`}
                 onAnswer={answer => {
                     if (!['y', 'ye', 'yes'].includes(answer.toLocaleLowerCase())) {
                         exit()
@@ -74,7 +74,7 @@ export const useCreateProject = (answers: Record<Question, string>) => {
                         return
                     }
 
-                    fs.removeSync(answers['app-dir'])
+                    fs.removeSync(answers[Question.AppDir])
                     createProject()
                 }}
             />

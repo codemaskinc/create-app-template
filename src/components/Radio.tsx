@@ -1,24 +1,24 @@
 import React, { useState } from 'react'
 import { Box, Text, useInput } from 'ink'
 
-type Item = {
+type Item<TValue extends string> = {
     label: string,
-    value: string
+    value: TValue
 }
 
-type RadioProps = {
+type RadioProps<TValue extends string> = {
     question: string,
-    list: Array<Item>,
+    list: Array<Item<TValue>>,
     initialList?: Array<string>,
     onSubmit(answer: Array<string>): void
 }
 
-export const Radio: React.FunctionComponent<RadioProps> = ({
+export const Radio = <TValue extends string>({
     question,
     list,
     initialList = [],
     onSubmit
-}) => {
+}: RadioProps<TValue>) => {
     const [ selected, setSelected ] = useState(initialList)
     const [ current, setCurrent ] = useState(0)
     const [ answered, setAnswered ] = useState(false)

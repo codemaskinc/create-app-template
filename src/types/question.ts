@@ -1,5 +1,5 @@
 export enum Question {
-    AppDir = 'app-dir',
+    AppDir = 'appDir',
     Template = 'template',
     Extras = 'extras'
 }
@@ -15,18 +15,23 @@ type ListItem = {
     value: string
 }
 
-export type QuestionItem = {
+export type QuestionInputItem = {
     type: QuestionType.Text,
     initialValue?: string,
     question: string
-} | {
+}
+
+export type QuestionListItem = {
     type: QuestionType.List,
     question: string,
-    options: Array<ListItem>,
-    reply(answer: string): string
-} | {
+    options: Array<ListItem>
+}
+
+export type QuestionRadioItem = {
     type: QuestionType.Radio,
     question: string,
     options: Record<string, Array<ListItem>>,
     initialList: Record<string, Array<string>>
 }
+
+export type QuestionItem = QuestionInputItem | QuestionListItem | QuestionRadioItem

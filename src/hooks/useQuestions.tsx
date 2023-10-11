@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
+import { questions } from '../data/index.js'
 import { List, QuestionInput, Radio } from '../components/index.js'
 import { Question, QuestionType, Template } from '../types/index.js'
-import { questions } from '../data/index.js'
 
-const questionsOrder = Object.keys(questions) as Array<Question>
+const questionsOrder = Object.keys(questions)
 
 export const useQuestions = () => {
     const [ currentQuestion, setCurrentQuestion ] = useState(questionsOrder[0]!)
     const [ answers, setAnswers ] = useState(questionsOrder.reduce((acc, question) => ({ ...acc, [question]: '' }), {} as Record<Question, string>))
-    const answeredQuestions = (Object.keys(answers) as Array<Question>).filter(key => answers[key] !== '')
+    const answeredQuestions = Object.keys(answers).filter(key => answers[key] !== '')
 
     const handleAnswer = (answer: string) => {
+        // if there is empty answer, provide 'none' as value
         setAnswers({ ...answers, [currentQuestion]: answer || 'none' })
         const nextQuestion = questionsOrder[questionsOrder.indexOf(currentQuestion) + 1]
 
@@ -21,7 +22,7 @@ export const useQuestions = () => {
         setCurrentQuestion(nextQuestion)
     }
 
-    const questionsItems = (Object.keys(questions) as Array<Question>)
+    const questionsItems = Object.keys(questions)
         .filter(question => answeredQuestions.includes(question) || question === currentQuestion)
         .map(question => {
             const data = questions[question]
@@ -33,7 +34,6 @@ export const useQuestions = () => {
                         title={data.question}
                         list={data.options}
                         onSubmit={handleAnswer}
-                        getReply={data.reply}
                     />
                 )
             }

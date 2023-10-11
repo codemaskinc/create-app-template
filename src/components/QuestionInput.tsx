@@ -1,5 +1,5 @@
-import { Box, Text, useInput } from 'ink'
 import React, { useEffect, useState } from 'react'
+import { Box, Text, useInput } from 'ink'
 
 type QuestionInputProps = {
     initialValue?: string,

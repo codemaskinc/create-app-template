@@ -1,2 +1,2 @@
-export { questions } from './questions.js'
+export { questions } from './questions/index.js'
 export { packagesExtrasMap } from './packages.js'

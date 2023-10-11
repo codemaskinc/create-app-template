@@ -1,16 +1,16 @@
 import fs from 'fs-extra'
+import { packagesExtrasMap } from '../data/index.js'
 import { walk } from './walk.js'
 import { install } from './install.js'
-import { packagesExtrasMap } from '../data/packages.js'
 
 type AddExtrasProps = {
-    path: string,
+    appDir: string,
     extras: string,
     template: string
 }
 
 export const addExtras = async ({
-    path,
+    appDir,
     extras: extrasRaw,
     template
 }: AddExtrasProps) => {
@@ -30,7 +30,7 @@ export const addExtras = async ({
         return acc
     }, [])
 
-    const installPromise = install(path, extrasPackages)
+    const installPromise = install(appDir, extrasPackages)
     const extrasPromise = Promise.all(extras.map(async extra => {
         const extraPath = `./template/${template}/extras/${extra}`
         const exist = await fs.exists(extraPath)
@@ -42,15 +42,15 @@ export const addExtras = async ({
         const extrasFiles = walk(extraPath).map(file => file.replace(`${extraPath}/`, ''))
 
         await Promise.all(extrasFiles.map(async file => {
-            const originalFile = await fs.exists(`${path}/${file}`)
-                ? fs.readFileSync(`${path}/${file}`, 'utf-8').split('\n').slice(0, 1).join('\n')
+            const originalFile = await fs.exists(`${appDir}/${file}`)
+                ? fs.readFileSync(`${appDir}/${file}`, 'utf-8').split('\n').slice(0, 1).join('\n')
                 : ''
             const extraFile = await fs.readFile(`${extraPath}/${file}`, 'utf-8')
             const newFile = originalFile !== ''
                 ? `${originalFile}\n${extraFile}`
                 : extraFile
 
-            await fs.writeFile(`${path}/${file}`, newFile)
+            await fs.writeFile(`${appDir}/${file}`, newFile)
         }))
     }))
 

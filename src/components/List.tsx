@@ -1,24 +1,22 @@
 import React, { useState } from 'react'
 import { Box, Text, useInput } from 'ink'
 
-type Item = {
+type Item<TValue extends string> = {
     label: string,
-    value: string
+    value: TValue
 }
 
-type ListProps = {
+type ListProps<TValue extends string> = {
     title: string,
-    list: Array<Item>,
-    onSubmit(answer: string): void,
-    getReply(answer: string): string
+    list: Array<Item<TValue>>,
+    onSubmit(answer: TValue): void
 }
 
-export const List: React.FunctionComponent<ListProps> = ({
+export const List = <TValue extends string>({
     title,
     list,
-    onSubmit,
-    getReply
-}) => {
+    onSubmit
+}: ListProps<TValue>) => {
     const [ current, setCurrent ] = useState(0)
     const [ answered, setAnswered ] = useState(false)
 
@@ -40,7 +38,7 @@ export const List: React.FunctionComponent<ListProps> = ({
         }
 
         if (key.return) {
-            onSubmit(list[current]?.value ?? '')
+            onSubmit(list[current]!.value)
             setAnswered(true)
 
             return
@@ -61,11 +59,6 @@ export const List: React.FunctionComponent<ListProps> = ({
                     {item.label}
                 </Text>
             ))}
-            {answered && (
-                <Text color='green'>
-                    {getReply(list[current]!.value)}
-                </Text>
-            )}
         </Box>
     )
 }
