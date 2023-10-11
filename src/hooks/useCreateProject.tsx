@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Text, useApp } from 'ink'
 import fs from 'fs-extra'
 import { QuestionInput } from '../components/index.js'
-import { copyTemplate, installDeps, replaceInFile, initGit } from '../utils/index.js'
+import { copyTemplate, installDeps, replaceInFile, initGit, addExtras } from '../utils/index.js'
 import { CreateProgress, Question, Template } from '../types/index.js'
 
 const textByProgress = {
@@ -24,6 +24,11 @@ export const useCreateProject = (answers: Record<Question, string>) => {
 
         addProgress(CreateProgress.CopyTemplate)
         copyTemplate(path, answers['template'] as Template)
+        addExtras({
+            extras: answers['extras'],
+            path,
+            template: answers['template']
+        })
         addProgress(CreateProgress.InitGit)
         initGit(path)
         addProgress(CreateProgress.InstallDeps)

@@ -6,23 +6,24 @@ type Item = {
     value: string
 }
 
-type ListProps = {
-    title: string,
+type RadioProps = {
+    question: string,
     list: Array<Item>,
-    onSubmit(answer: string): void,
-    getReply(answer: string): string
+    initialList?: Array<string>,
+    onSubmit(answer: Array<string>): void
 }
 
-export const List: React.FunctionComponent<ListProps> = ({
-    title,
+export const Radio: React.FunctionComponent<RadioProps> = ({
+    question,
     list,
-    onSubmit,
-    getReply
+    initialList = [],
+    onSubmit
 }) => {
+    const [ selected, setSelected ] = useState(initialList)
     const [ current, setCurrent ] = useState(0)
     const [ answered, setAnswered ] = useState(false)
 
-    useInput((_input, key) => {
+    useInput((input, key) => {
         if (answered) {
             return
         }
@@ -40,8 +41,22 @@ export const List: React.FunctionComponent<ListProps> = ({
         }
 
         if (key.return) {
-            onSubmit(list[current]?.value!)
+            onSubmit(selected)
             setAnswered(true)
+
+            return
+        }
+
+        if (input === ' ') {
+            const currentItem = list[current]!
+
+            if (selected.includes(currentItem.value)) {
+                setSelected(selected.filter(item => item !== currentItem.value))
+
+                return
+            }
+
+            setSelected([...selected, currentItem.value])
 
             return
         }
@@ -50,22 +65,21 @@ export const List: React.FunctionComponent<ListProps> = ({
     return (
         <Box flexDirection='column'>
             <Text>
-                {title}
+                {question}
+            </Text>
+            <Text>
+                (Press space to toggle selection, enter to submit)
             </Text>
             {list.map((item, index) => (
                 <Text 
-                    key={item.label}
+                    key={item.value}
                     color={index === current ? 'red' : 'white'}
                 >
                     {index === current && !answered ? '❯ ' : '  '}
+                    {selected.includes(item.value) ? '◉ ' : '◯ '}
                     {item.label}
                 </Text>
             ))}
-            {answered && (
-                <Text color='green'>
-                    {getReply(list[current]!.value)}
-                </Text>
-            )}
         </Box>
     )
 }

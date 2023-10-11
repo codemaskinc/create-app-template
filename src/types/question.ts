@@ -1,12 +1,13 @@
 export enum Question {
     AppDir = 'app-dir',
     Template = 'template',
-    TsOrJs = 'ts-or-js'
+    Extras = 'extras'
 }
 
 export enum QuestionType {
     Text = 'text',
-    List = 'list'
+    List = 'list',
+    Radio = 'radio'
 }
 
 type ListItem = {
@@ -23,4 +24,9 @@ export type QuestionItem = {
     question: string,
     options: Array<ListItem>,
     reply(answer: string): string
+} | {
+    type: QuestionType.Radio,
+    question: string,
+    options: Record<string, Array<ListItem>>,
+    initialList: Record<string, Array<string>>
 }
