@@ -8,6 +8,10 @@ export const extras = {
             {
                 label: '@codegateinc/react-form-builder-v2',
                 value: 'form'
+            },
+            {
+                label: 'react-toastify',
+                value: 'toastify'
             }
         ],
         [Template.ReactNative] : [],
