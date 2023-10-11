@@ -5,5 +5,5 @@ export type RouteType = {
     children?: Array<RouteType>,
     path?: string,
     element?: React.ReactNode,
-    name: string
+    name?: string
 }

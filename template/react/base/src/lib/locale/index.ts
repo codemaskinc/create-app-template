@@ -1,5 +1,5 @@
 import type { Dictionary } from './locale'
-import { plPL } from './pl_PL'
+import { enUS } from './en_US'
 
 export enum Language {
     en_US = 'en-US',
@@ -15,5 +15,5 @@ export const languages = {
 
 export {
     Dictionary,
-    plPL
+    enUS
 }

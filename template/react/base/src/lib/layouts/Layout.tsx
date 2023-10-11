@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Outlet } from 'react-router-dom'
+import { Nav } from 'lib/components'
 
 export const Layout: React.FunctionComponent = () => (
     <LayoutContainer>
-        <PageContent>
-            <OutletContainer>
-                <Outlet />
-            </OutletContainer>
-        </PageContent>
+        <Nav />
+        <OutletContainer>
+            <Outlet />
+        </OutletContainer>
     </LayoutContainer>
 )
 
@@ -17,17 +17,8 @@ const LayoutContainer = styled.div`
     height: 100%;
     background-color: ${props => props.theme.layout.background};
     overflow: hidden;
-`
-
-const PageContent = styled.div`
-    height: 100%;
-    transition: margin-left linear 0.2s;
-    display: flex;
-    background-color: ${props => props.theme.dark.dark75};
-    flex: 1;
-    flex-direction: column;
-    overflow: hidden;
-    position: relative;
+    display: grid;
+    place-items: center;
 `
 
 const OutletContainer = styled.div`

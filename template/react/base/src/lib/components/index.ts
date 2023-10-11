@@ -1,2 +1,5 @@
 export { Loader } from './Loader'
 export { FullScreenLoader } from './FullScreenLoader'
+export { Icon } from './Icon'
+export * as Typography from './Typography'
+export { Nav } from './Nav'

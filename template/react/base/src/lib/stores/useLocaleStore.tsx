@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useAtom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
-import { Dictionary, Language, languages, plPL } from 'lib/locale'
+import { Dictionary, Language, languages, enUS } from 'lib/locale'
 import { R, languageHelpers } from '../utils'
 import { Nullable, PersistorKey } from '../types'
 
 const languageAtom = atomWithStorage<Language>(PersistorKey.Locale, languageHelpers.getDefaultLanguage())
 
 export const useLocaleStore = () => {
-    const [T, setTranslations] = useState<Nullable<Dictionary>>(plPL)
+    const [T, setTranslations] = useState<Nullable<Dictionary>>(enUS)
     const [isChangingLanguage, setIsChangingLanguage] = useState(true)
     const [languageTag, setLanguageTag] = useAtom(languageAtom)
 
