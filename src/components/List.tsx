@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Box, Text, useInput } from 'ink'
+import { Question } from '../types/index.js'
+import { questionsToSkip } from '../cli.js'
 
 type Item<TValue extends string> = {
     label: string,
@@ -8,6 +10,7 @@ type Item<TValue extends string> = {
 
 type ListProps<TValue extends string> = {
     title: string,
+    question: Question,
     list: Array<Item<TValue>>,
     onSubmit(answer: TValue): void
 }
@@ -15,13 +18,15 @@ type ListProps<TValue extends string> = {
 export const List = <TValue extends string>({
     title,
     list,
+    question,
     onSubmit
 }: ListProps<TValue>) => {
+    const hide = questionsToSkip.includes(question)
     const [ current, setCurrent ] = useState(0)
     const [ answered, setAnswered ] = useState(false)
 
     useInput((_input, key) => {
-        if (answered) {
+        if (answered || hide) {
             return
         }
 
@@ -44,6 +49,10 @@ export const List = <TValue extends string>({
             return
         }
     })
+
+    if (hide) {
+        return null
+    }
 
     return (
         <Box flexDirection='column'>

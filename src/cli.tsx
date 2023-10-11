@@ -2,6 +2,7 @@
 import React from 'react'
 import { render } from 'ink'
 import meow from 'meow'
+import { Template, Question } from './types/index.js'
 import { App } from './app.js'
 
 const cli = meow(
@@ -14,9 +15,10 @@ const cli = meow(
         --yarn Use yarn
         --pnpm Use pnpm
 		--bun Use bun
+        --template (react, react-native, astro, nest-js)
 
 	Examples
-	  $ create-codemask-app --bun
+	  $ create-codemask-app --bun --template react
 `,
     {
         importMeta: import.meta,
@@ -32,11 +34,23 @@ const cli = meow(
             },
             bun: {
                 type: 'boolean'
+            },
+            template: {
+                type: 'string'
             }
         }
     }
 )
 
 export const { flags } = cli
+
+if (flags.template && !Object.values(Template).includes(flags.template as Template)) {
+    console.error(`Invalid template value was provided - "${flags.template}"`)
+    process.exit(1)
+}
+
+export const questionsToSkip = [
+    ...flags.template ? [ Question.Template ] : []
+]
 
 render(<App />)
