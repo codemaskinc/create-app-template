@@ -12,8 +12,8 @@ export const App: React.FunctionComponent = () => {
     const { questionsItems, answers } = useQuestions()
     const { progressText, forceCreateQuestion } = useCreateProject(answers)
 
-	return (
-		<Box flexDirection='column' display='flex'>
+    return (
+        <Box flexDirection='column' display='flex'>
             {questionsItems}
             {progressText}
             {forceCreateQuestion}
@@ -22,6 +22,6 @@ export const App: React.FunctionComponent = () => {
                     {log}
                 </Text>
             ))}
-		</Box>
-	)
+        </Box>
+    )
 }

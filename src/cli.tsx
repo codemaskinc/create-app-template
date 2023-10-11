@@ -5,7 +5,7 @@ import meow from 'meow'
 import { App } from './app.js'
 
 const cli = meow(
-	`
+    `
 	Usage
 	  $ create-codemask-app
 
@@ -18,23 +18,23 @@ const cli = meow(
 	Examples
 	  $ create-codemask-app --bun
 `,
-	{
-		importMeta: import.meta,
-		flags: {
-			npm: {
-				type: 'boolean'
-			},
+    {
+        importMeta: import.meta,
+        flags: {
+            npm: {
+                type: 'boolean'
+            },
             yarn: {
-				type: 'boolean'
-			},
+                type: 'boolean'
+            },
             pnpm: {
-				type: 'boolean'
-			},
+                type: 'boolean'
+            },
             bun: {
-				type: 'boolean'
-			}
-		}
-	}
+                type: 'boolean'
+            }
+        }
+    }
 )
 
 export const { flags } = cli

@@ -1,4 +1,4 @@
-import { Question, QuestionItem, QuestionType, Template } from "../types/index.js";
+import { Question, QuestionItem, QuestionType, Template } from '../types/index.js'
 
 export const questions = {
     [Question.AppDir]: {
@@ -7,7 +7,7 @@ export const questions = {
         question: 'Where should we create your new project?'
     },
     [Question.Template]: {
-    type: QuestionType.List,
+        type: QuestionType.List,
         question: 'What template will you use?',
         options: [
             {

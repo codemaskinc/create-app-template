@@ -40,7 +40,7 @@ export const List: React.FunctionComponent<ListProps> = ({
         }
 
         if (key.return) {
-            onSubmit(list[current]?.value!)
+            onSubmit(list[current]?.value ?? '')
             setAnswered(true)
 
             return
@@ -53,7 +53,7 @@ export const List: React.FunctionComponent<ListProps> = ({
                 {title}
             </Text>
             {list.map((item, index) => (
-                <Text 
+                <Text
                     key={item.label}
                     color={index === current ? 'red' : 'white'}
                 >

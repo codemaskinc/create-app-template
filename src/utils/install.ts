@@ -1,5 +1,5 @@
-import { execa } from "execa"
-import { getUserPkgManager } from "./getPackageManager.js"
+import { execa } from 'execa'
+import { getUserPkgManager } from './getPackageManager.js'
 
 export const install = async (path: string, packages: Array<string>) => {
     const pkgManager = getUserPkgManager()

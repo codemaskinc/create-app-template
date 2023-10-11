@@ -16,7 +16,7 @@ export const QuestionInput: React.FunctionComponent<QuestionInputProps> = ({
     const [ showCursor, setShowCursor ] = useState(true)
     const [ answered, setAnswered ] = useState(false)
 
-	useInput((input, key) => {
+    useInput((input, key) => {
         if (answered) {
             return
         }
@@ -35,7 +35,7 @@ export const QuestionInput: React.FunctionComponent<QuestionInputProps> = ({
         }
 
         setValue(`${value}${input}`)
-	})
+    })
 
     useEffect(() => {
         setShowCursor(true)
@@ -47,7 +47,7 @@ export const QuestionInput: React.FunctionComponent<QuestionInputProps> = ({
         return () => clearInterval(interval)
     }, [value])
 
-	return (
+    return (
         <Box>
             <Box marginRight={1}>
                 <Text color='white'>

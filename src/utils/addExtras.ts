@@ -38,7 +38,7 @@ export const addExtras = async ({
         if (!exist) {
             return
         }
-        
+
         const extrasFiles = walk(extraPath).map(file => file.replace(`${extraPath}/`, ''))
 
         await Promise.all(extrasFiles.map(async file => {

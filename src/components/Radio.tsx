@@ -71,7 +71,7 @@ export const Radio: React.FunctionComponent<RadioProps> = ({
                 (Press space to toggle selection, enter to submit)
             </Text>
             {list.map((item, index) => (
-                <Text 
+                <Text
                     key={item.value}
                     color={index === current ? 'red' : 'white'}
                 >

@@ -37,7 +37,7 @@ export const useCreateProject = (answers: Record<Question, string>) => {
         addProgress(CreateProgress.Complete)
         exit()
     }
-    
+
     useEffect(() => {
         const filled = Object.values(answers).every((answer) => answer !== '')
 
