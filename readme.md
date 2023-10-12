@@ -9,6 +9,13 @@ $ pnpm install --global create-codemask-app
 $ bun install --global create-codemask-app
 ```
 
+## Build
+
+```bash
+yarn run build
+create-codemask-app
+```
+
 ## CLI
 
 ```
