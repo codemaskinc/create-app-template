@@ -1,14 +1,5 @@
 # create-codemask-app
 
-## Install
-
-```bash
-$ npm install --global create-codemask-app
-$ yarn add --global create-codemask-app
-$ pnpm install --global create-codemask-app
-$ bun install --global create-codemask-app
-```
-
 ## Build
 
 ```bash
