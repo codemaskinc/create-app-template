@@ -1,9 +1,9 @@
 {
   "author": "brentlok",
-  "name": "create-codemask-app",
+  "name": "@codemaskinc/create-app-template",
   "version": "0.1.0",
   "license": "MIT",
-  "repository": "https://github.com/codemaskinc/create-codemask-app",
+  "repository": "https://github.com/codemaskinc/create-app-template",
   "keywords": [
     "react",
     "react-native",
@@ -16,7 +16,7 @@
     "node": ">=16"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -R ./template ./dist",
     "dev": "tsc --watch"
   },
   "files": [
