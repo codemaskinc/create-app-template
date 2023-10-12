@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Text, useApp } from 'ink'
 import fs from 'fs-extra'
+import ncu from 'npm-check-updates'
 import { QuestionInput } from '../components/index.js'
 import { CreateProgress, Question } from '../types/index.js'
-import { installDeps, replaceInFile, initGit, addExtras } from '../utils/index.js'
+import { replaceInFile, initGit, addExtras, getPath } from '../utils/index.js'
 
 const textByProgress = {
     [CreateProgress.CopyTemplate]: 'Copying template...',
@@ -23,7 +24,7 @@ export const useCreateProject = (answers: Record<Question, string>) => {
         const { extras, template, appDir } = answers
 
         addProgress(CreateProgress.CopyTemplate)
-        fs.copySync(`./template/${template}/base`, appDir)
+        fs.copySync(`${getPath().__dirname}/template/${template}/base`, appDir)
         addExtras({
             extras,
             appDir,
@@ -32,7 +33,10 @@ export const useCreateProject = (answers: Record<Question, string>) => {
         addProgress(CreateProgress.InitGit)
         initGit(appDir)
         addProgress(CreateProgress.InstallDeps)
-        await installDeps(appDir)
+        await ncu.run({
+            packageFile: `${appDir}/package.json`,
+            upgrade: true
+        })
         replaceInFile(`${appDir}/package.json`, 'my-app', appDir.replace(/.*\//, ''))
         addProgress(CreateProgress.Complete)
         exit()
@@ -58,7 +62,10 @@ export const useCreateProject = (answers: Record<Question, string>) => {
         progressText: progress ? (
             <React.Fragment>
                 {progress.map(progressItem => (
-                    <Text color='magenta'>
+                    <Text
+                        key={progressItem}
+                        color='magenta'
+                    >
                         {textByProgress[progressItem]}
                     </Text>
                 ))}

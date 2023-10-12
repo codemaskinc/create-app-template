@@ -1,12 +1,6 @@
 import React from 'react'
-import { Box, Text } from 'ink'
+import { Box } from 'ink'
 import { useCreateProject, useQuestions } from './hooks/index.js'
-
-export const updateLogs = (newLogs: Array<string>) => {
-    logs = newLogs
-}
-
-let logs = [] as Array<string>
 
 export const App: React.FunctionComponent = () => {
     const { questionsItems, answers } = useQuestions()
@@ -20,11 +14,6 @@ export const App: React.FunctionComponent = () => {
             {questionsItems}
             {progressText}
             {forceCreateQuestion}
-            {logs.map(log => (
-                <Text color={'yellowBright'}>
-                    {log}
-                </Text>
-            ))}
         </Box>
     )
 }

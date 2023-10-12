@@ -1,19 +1,19 @@
-# create-codemask-app
+# @codemaskinc/create-app-template
 
 ## Build
 
 ```bash
 yarn run build
-create-codemask-app
+@codemaskinc/create-app-template
 ```
 
 ## CLI
 
 ```
-$ create-codemask-app --help
+$ @codemaskinc/create-app-template --help
 
   Usage
-    $ create-codemask-app
+    $ @codemaskinc/create-app-template
 
   Options
     --npm Use npm 
@@ -23,7 +23,7 @@ $ create-codemask-app --help
     --template (React, React Native, Astro, NestJS)
 
   Examples
-    $ create-codemask-app --bun --template React
+    $ @codemaskinc/create-app-template --bun --template React
 ```
 
 ## Creating / Editing template

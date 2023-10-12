@@ -8,7 +8,7 @@ import { App } from './app.js'
 const cli = meow(
     `
 	Usage
-	  $ create-codemask-app
+	  $ @codemaskinc/create-app-template
 
 	Options
         --npm Use npm 
@@ -18,7 +18,7 @@ const cli = meow(
         --template (react, react-native, astro, nest-js)
 
 	Examples
-	  $ create-codemask-app --bun --template react
+	  $ @codemaskinc/create-app-template --bun --template react
 `,
     {
         importMeta: import.meta,

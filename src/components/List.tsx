@@ -61,7 +61,7 @@ export const List = <TValue extends string>({
             </Text>
             {list.map((item, index) => (
                 <Text
-                    key={item.label}
+                    key={item.value}
                     color={index === current ? 'red' : 'white'}
                 >
                     {index === current && !answered ? '❯ ' : '  '}

@@ -1,5 +1,6 @@
 import fs from 'fs-extra'
 import { packagesExtrasMap } from '../data/index.js'
+import { getPath } from './getPath.js'
 import { walk } from './walk.js'
 import { install } from './install.js'
 
@@ -31,7 +32,7 @@ export const addExtras = async ({
     }, [])
 
     extras.forEach(extra => {
-        const extraPath = `./template/${template}/extras/${extra}`
+        const extraPath = `${getPath().__dirname}/template/${template}/extras/${extra}`
         const exist = fs.existsSync(extraPath)
 
         if (!exist) {
