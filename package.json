@@ -1,7 +1,15 @@
 {
+  "author": "brentlok",
   "name": "create-codemask-app",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "license": "MIT",
+  "repository": "https://github.com/codemaskinc/create-codemask-app",
+  "keywords": [
+    "react",
+    "react-native",
+    "astro",
+    "nest-js"
+  ],
   "bin": "dist/cli.js",
   "type": "module",
   "engines": {
@@ -32,7 +40,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "@typescript-eslint/eslint-plugin": "6.7.5",
     "@typescript-eslint/parser": "6.7.5",
-    "eslint": "8.50.0",
+    "eslint": "8.51.0",
     "prettier": "3.0.3",
     "typescript": "5.2.2",
     "xo": "0.56.0"
