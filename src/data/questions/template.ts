@@ -17,8 +17,12 @@ export const template = {
             value: Template.Astro
         },
         {
-            label: 'NestJS',
-            value: Template.NestJS
+            label: 'NestJS - REST API',
+            value: Template.NestJSRestApi
+        },
+        {
+            label: 'NestJS - GraphQL',
+            value: Template.NestJSGraphQL
         }
     ]
 } satisfies QuestionListItem
