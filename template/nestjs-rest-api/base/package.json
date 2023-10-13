@@ -1,7 +1,7 @@
 {
   "name": "api-starter",
   "version": "1.0.0",
-  "author": "Codegate",
+  "author": "Codemask",
   "private": true,
   "scripts": {
     "prebuild": "rimraf dist",
