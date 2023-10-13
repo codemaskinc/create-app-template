@@ -16,12 +16,14 @@ export const extras = {
         ],
         [Template.ReactNative] : [],
         [Template.Astro] : [],
-        [Template.NestJS] : []
+        [Template.NestJSRestApi] : [],
+        [Template.NestJSGraphQL] : []
     },
     initialList: {
         [Template.React] : ['form'],
         [Template.ReactNative] : [],
         [Template.Astro] : [],
-        [Template.NestJS] : []
+        [Template.NestJSRestApi] : [],
+        [Template.NestJSGraphQL] : []
     }
 } satisfies QuestionRadioItem
