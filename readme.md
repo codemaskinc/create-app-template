@@ -1,29 +1,47 @@
 # @codemaskinc/create-app-template
 
-## Build
+## Usage
+
+#### npx
 
 ```bash
-yarn run build
-@codemaskinc/create-app-template
+  npx @codemaskinc/create-app-template
 ```
 
-## CLI
+#### yarn
 
+```bash
+  yarn create @codemaskinc/create-app-template
 ```
-$ @codemaskinc/create-app-template --help
 
-  Usage
-    $ @codemaskinc/create-app-template
+#### pnpm
 
-  Options
-    --npm Use npm 
-    --yarn Use yarn
-    --pnpm Use pnpm
-    --bun Use bun
-    --template (React, React Native, Astro, NestJS)
+```bash
+  pnpm create @codemaskinc/create-app-template
+```
 
-  Examples
-    $ @codemaskinc/create-app-template --bun --template React
+#### bunx
+
+```bash
+  bunx create @codemaskinc/create-app-template
+```
+
+## Flags
+
+The following flags can be used to configure the package manager and template:
+
+| Flag | Description |
+|---|---|
+| `--npm` | Selects the NPM package manager. |
+| `--yarn` | Selects the Yarn package manager. |
+| `--pnpm` | Selects the PNPM package manager. |
+| `--bun` | Selects the Bun package manager. |
+| `--template` | Selects a template to use when generating the project (e.g., `react`, `react-native`, `astro`, `nest-js`). |
+
+## Local build
+
+```bash
+  yarn build && npx create-app-template
 ```
 
 ## Creating / Editing template

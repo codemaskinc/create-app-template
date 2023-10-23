@@ -12,10 +12,10 @@ export const getUserPkgManager = () => {
     const userAgent = process.env.npm_config_user_agent
 
     if (!userAgent) {
-        return PackageManager.Npm
+        return PackageManager.Yarn
     }
 
-    const packageManager = Object.values(PackageManager).find(pkgManager => userAgent.startsWith(pkgManager)) || PackageManager.Npm
+    const packageManager = Object.values(PackageManager).find(pkgManager => userAgent.startsWith(pkgManager)) || PackageManager.Yarn
 
     return packageManager
 }

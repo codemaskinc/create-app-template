@@ -4,3 +4,8 @@ export enum PackageManager {
     Pnpm = 'pnpm',
     Bun = 'bun'
 }
+
+export type Package = {
+    name: string,
+    version: string
+}

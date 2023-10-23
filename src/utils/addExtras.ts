@@ -3,6 +3,7 @@ import { packagesExtrasMap } from '../data/index.js'
 import { getPath } from './getPath.js'
 import { walk } from './walk.js'
 import { install } from './install.js'
+import { Package } from '../types/index.js'
 
 type AddExtrasProps = {
     appDir: string,
@@ -19,12 +20,12 @@ export const addExtras = async ({
         return
     }
 
-    const extras = extrasRaw.split('@@@')
-    const extrasPackages = extras.reduce<Array<string>>((acc, extra) => {
+    const extras = extrasRaw.split('@@@') as Array<keyof typeof packagesExtrasMap>
+    const extrasPackages = extras.reduce<Array<Package>>((acc, extra) => {
         if (extra in packagesExtrasMap) {
             return [
                 ...acc,
-                `${packagesExtrasMap[extra as keyof typeof packagesExtrasMap]}`
+                packagesExtrasMap[extra]
             ]
         }
 

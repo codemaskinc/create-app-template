@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Text, useApp } from 'ink'
 import fs from 'fs-extra'
-import ncu from 'npm-check-updates'
 import { QuestionInput } from '../components/index.js'
 import { CreateProgress, Question } from '../types/index.js'
-import { replaceInFile, initGit, addExtras, getPath } from '../utils/index.js'
+import { replaceInFile, initGit, addExtras, getPath, changePackageManager } from '../utils/index.js'
 
 const textByProgress = {
     [CreateProgress.CopyTemplate]: 'Copying template...',
     [CreateProgress.InitGit]: 'Initializing git...',
-    [CreateProgress.InstallDeps]: 'Installing dependencies...',
     [CreateProgress.Complete]: 'Done! 🚀',
 }
 
@@ -32,12 +30,8 @@ export const useCreateProject = (answers: Record<Question, string>) => {
         })
         addProgress(CreateProgress.InitGit)
         initGit(appDir)
-        addProgress(CreateProgress.InstallDeps)
-        await ncu.run({
-            packageFile: `${appDir}/package.json`,
-            upgrade: true
-        })
-        replaceInFile(`${appDir}/package.json`, 'my-app', appDir.replace(/.*\//, ''))
+        replaceInFile(`${appDir}/package.json`, new RegExp('"name": ".*",', 'g'), `"name": "${appDir.replace(/.*\//, '')}",`)
+        changePackageManager(appDir)
         addProgress(CreateProgress.Complete)
         exit()
     }
@@ -59,7 +53,7 @@ export const useCreateProject = (answers: Record<Question, string>) => {
     }, [answers])
 
     return {
-        progressText: progress ? (
+        progressText: (
             <React.Fragment>
                 {progress.map(progressItem => (
                     <Text
@@ -70,7 +64,7 @@ export const useCreateProject = (answers: Record<Question, string>) => {
                     </Text>
                 ))}
             </React.Fragment>
-        ) : null,
+        ),
         forceCreateQuestion: pathExist && progress.length === 0 ? (
             <QuestionInput
                 question={`Path ${answers[Question.AppDir]} already exists. Do you want to overwrite it? You will lose all data that is in here. (y/n)`}
