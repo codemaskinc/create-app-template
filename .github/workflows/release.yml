@@ -1,0 +1,16 @@
+name: Create Release
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create Release
+        uses: actions/create-release@v4
+        with:
+          tag: ${{ github.ref }}
+          body: |
+            Release notes for version ${{ github.ref }}
+          draft: false
