@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Text, useApp } from 'ink'
 import fs from 'fs-extra'
 import { QuestionInput } from '../components/index.js'
-import { CreateProgress, Question } from '../types/index.js'
-import { replaceInFile, initGit, addExtras, getPath, changePackageManager } from '../utils/index.js'
+import { CreateProgress, Question, Template } from '../types/index.js'
+import { replaceInFile, addExtras, changePackageManager, isEnum, cloneTemplate, clearGit } from '../utils/index.js'
 
 const textByProgress = {
     [CreateProgress.CopyTemplate]: 'Copying template...',
-    [CreateProgress.InitGit]: 'Initializing git...',
     [CreateProgress.Complete]: 'Done! 🚀',
 }
 
@@ -21,15 +20,19 @@ export const useCreateProject = (answers: Record<Question, string>) => {
     const createProject = async () => {
         const { extras, template, appDir } = answers
 
+        if (!isEnum(Template, template)) {
+            throw new Error('Template is not valid')
+        }
+
         addProgress(CreateProgress.CopyTemplate)
-        fs.copySync(`${getPath().__dirname}/template/${template}/base`, appDir)
+        await cloneTemplate(template, appDir)
+        // We want to reset git in the template
+        await clearGit(appDir)
         addExtras({
             extras,
             appDir,
             template
         })
-        addProgress(CreateProgress.InitGit)
-        initGit(appDir)
         replaceInFile(`${appDir}/package.json`, new RegExp('"name": ".*",', 'g'), `"name": "${appDir.replace(/.*\//, '')}",`)
         changePackageManager(appDir)
         addProgress(CreateProgress.Complete)
