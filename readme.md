@@ -2,28 +2,28 @@
 
 ## Usage
 
-#### npx
+#### npm
 
 ```bash
-  npx @codemaskinc/create-app-template
+  npm create @codemaskinc/app-template
 ```
 
 #### yarn
 
 ```bash
-  yarn create @codemaskinc/create-app-template
+  yarn create @codemaskinc/app-template
 ```
 
 #### pnpm
 
 ```bash
-  pnpm create @codemaskinc/create-app-template
+  pnpm create @codemaskinc/app-template
 ```
 
 #### bunx
 
 ```bash
-  bunx create @codemaskinc/create-app-template
+  bunx @codemaskinc/create-app-template
 ```
 
 ## Flags
