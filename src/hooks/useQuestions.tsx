@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { questions } from '../data/index.js'
 import { List, QuestionInput, Radio } from '../components/index.js'
-import { Question, QuestionType, Template } from '../types/index.js'
+import { EMPTY_ANSWER, Question, QuestionType, Template } from '../types/index.js'
 import { flags, questionsToSkip } from '../cli.js'
 
 const questionsOrder = Object.keys(questions)
@@ -25,9 +25,17 @@ export const useQuestions = () => {
 
     const handleAnswer = (answer: string) => {
         // if there is empty answer, provide 'none' as value
-        setAnswers({ ...answers, [currentQuestion]: answer || 'none' })
+        const newAnswers = { ...answers, [currentQuestion]: answer || EMPTY_ANSWER }
+        setAnswers(newAnswers)
         const nextQuestion = questionsOrder.find((question, index) => {
             if (index <= questionsOrder.indexOf(currentQuestion)) {
+                return false
+            }
+
+            // If there is no extras option for selected template, we want to skip extras question
+            if (question === Question.Extras && questions.extras.options[newAnswers.template as Template].length === 0) {
+                setAnswers({ ...newAnswers, [Question.Extras]: EMPTY_ANSWER })
+
                 return false
             }
 

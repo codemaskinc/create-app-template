@@ -35,3 +35,5 @@ export type QuestionRadioItem = {
 }
 
 export type QuestionItem = QuestionInputItem | QuestionListItem | QuestionRadioItem
+
+export const EMPTY_ANSWER = 'none' as const

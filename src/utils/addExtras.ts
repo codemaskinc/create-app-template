@@ -3,7 +3,7 @@ import { packagesExtrasMap } from '../data/index.js'
 import { getPath } from './getPath.js'
 import { walk } from './walk.js'
 import { install } from './install.js'
-import { Package, Template } from '../types/index.js'
+import { EMPTY_ANSWER, Package, Template } from '../types/index.js'
 
 type AddExtrasProps = {
     appDir: string,
@@ -16,7 +16,7 @@ export const addExtras = async ({
     extras: extrasRaw,
     template
 }: AddExtrasProps) => {
-    if (extrasRaw === 'none') {
+    if (extrasRaw === EMPTY_ANSWER) {
         return
     }
 
