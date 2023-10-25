@@ -3,6 +3,9 @@
   "name": "@codemaskinc/create-app-template",
   "version": "0.2.1",
   "license": "MIT",
+  "publishConfig": {
+		"access": "public"
+	},
   "repository": "https://github.com/codemaskinc/create-app-template",
   "keywords": [
     "react",
