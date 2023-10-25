@@ -3,7 +3,7 @@ import { Text, useApp } from 'ink'
 import fs from 'fs-extra'
 import { QuestionInput } from '../components/index.js'
 import { CreateProgress, Question, Template } from '../types/index.js'
-import { replaceInFile, addExtras, changePackageManager, isEnum, cloneTemplate } from '../utils/index.js'
+import { replaceInFile, addExtras, changePackageManager, isEnum, cloneTemplate, clearGit } from '../utils/index.js'
 
 const textByProgress = {
     [CreateProgress.CopyTemplate]: 'Copying template...',
@@ -26,6 +26,8 @@ export const useCreateProject = (answers: Record<Question, string>) => {
 
         addProgress(CreateProgress.CopyTemplate)
         await cloneTemplate(template, appDir)
+        // We want to reset git in the template
+        await clearGit(appDir)
         addExtras({
             extras,
             appDir,
