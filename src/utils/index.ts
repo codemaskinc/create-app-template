@@ -1,5 +1,6 @@
 export { replaceInFile } from './replaceInFile.js'
-export { initGit } from './initGit.js'
 export { addExtras } from './addExtras.js'
 export { getPath } from './getPath.js'
 export { changePackageManager } from './changePackageManager.js'
+export { cloneTemplate } from './cloneTemplate.js'
+export { isEnum } from './isEnum.js'
