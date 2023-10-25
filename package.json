@@ -19,7 +19,7 @@
     "node": ">=16"
   },
   "scripts": {
-    "prepare": "npm install && npm run build",
+    "prepublishOnly": "npm install && npm run build",
     "build": "tsc",
     "dev": "tsc --watch",
     "tsc": "tsc"
