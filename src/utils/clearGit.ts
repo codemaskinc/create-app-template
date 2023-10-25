@@ -1,8 +1,7 @@
 import { execa } from 'execa'
-import { rimraf } from 'rimraf'
+import fs from 'fs-extra'
 
 export const clearGit = async (path: string) => {
-    await rimraf(`${path}/.git`)
-
+    await fs.rmdir(`${path}/.git`, { recursive: true })
     await execa('git', ['init'], { cwd: path })
 }
