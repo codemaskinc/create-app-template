@@ -1,7 +1,7 @@
 {
   "author": "brentlok",
   "name": "@codemaskinc/create-app-template",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
