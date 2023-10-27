@@ -9,6 +9,7 @@ export const cloneTemplate = async (template: Template, path: string) => {
             return 'https://github.com/codemaskinc/react-template'
         case Template.ReactNative:
         case Template.Astro:
+            return 'https://github.com/codemaskinc/astro-template'
         case Template.NestJSRestApi:
             return 'https://github.com/codemaskinc/api-starter'
         case Template.NestJSGraphQL:
